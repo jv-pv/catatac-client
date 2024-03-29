@@ -30,7 +30,7 @@ function LoginPage(props) {
 
     post("/auth/login", thisUser)
         .then((response) => {
-            console.log(response.data)
+            console.log("Login response ==>", response.data)
             storeToken(response.data.authToken)
             authenticateUser()
             navigate("/")
