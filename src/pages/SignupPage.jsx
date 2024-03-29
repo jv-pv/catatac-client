@@ -31,7 +31,9 @@ function SignupPage(props) {
     post("/auth/signup", newUser)
       .then((response) => {
         console.log(`This is the new user => ${response.data}`);
-        navigate("/login");
+        storeToken(response.data.authToken)
+        authenticateUser()
+        navigate("/");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
