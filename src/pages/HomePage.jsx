@@ -1,36 +1,37 @@
-import axios from "axios";
 import { AuthContext } from "../context/auth.context";
-import { useContext } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { get } from "../services/authService";
 
 function HomePage() {
-
-  const { isLoggedIn, user } = useContext(AuthContext)
-
-
-  const fetchUser = async () => {
+  const [products, setProducts] = useState([])
+  const { isLoggedIn, user } = useContext(AuthContext);
+  const fetchUsers = async () => {
+    const authToken = localStorage.getItem("authToken");
+    
     try {
-      const storedToken = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:4000/users', {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
+      let response = await get("/products", {
+        headers: { Authorization: `Bearer ${authToken}` },
       });
-      console.log(response.data);
+      setProducts(response.data)
     } catch (error) {
-      console.log(error);
-      // Handle the error appropriately
+      console.error(error)
     }
   };
 
+  useEffect(() => {
+    fetchUsers()
+  },[])
+
+
   return (
-    <div>
-      <h1>Home Page</h1>
-      {isLoggedIn && user && (
-        <button className="bg-red-400 text-white" onClick={fetchUser}>
-          Click
-        </button>
-      )}
+    <div className="bg-gray-100 flex-1 text-black">
+      <h1 className="text-black">Home Page</h1>
+
+      <div>
+        {products.map(product => (
+          <div key={product._id}>{product.name}</div>
+        ))}
+      </div>
     </div>
   );
 }
