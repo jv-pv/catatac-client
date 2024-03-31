@@ -1,43 +1,101 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useContext } from "react"; // <== IMPORT
 import { AuthContext } from "../context/auth.context"; // <== IMPORT
 
 function Navbar() {
-  // Subscribe to the AuthContext to gain access to
-  // the values from AuthContext.Provider `value` prop
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isAdminProductsPage = location.pathname === "/admin/products";
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext); // <== ADD
 
   const getToken = () => {
     return localStorage.getItem("authToken");
   };
-  //  Update the rendering logic to display different content
-  //  depending on whether the user is logged in or not
-  return (
-    <nav>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
 
-      {/*    UPDATE     */}
-      {getToken() ? (
-        <>
-          <button onClick={logOutUser}>Logout</button>
-          {/* <span>{user && user.name}</span> */}
-        </>
-      ) : (
-        <>
-          <Link to="/signup">
-            {" "}
-            <button>Sign Up</button>{" "}
-          </Link>
-          <Link to="/login">
-            {" "}
-            <button>Login</button>{" "}
-          </Link>
-        </>
-      )}
+  return (
+    <nav className='flex bg-gray-100  h-16'>
+      <div className='flex items-center'>
+        <img src='/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
+      </div>
+
+      <ul className='flex items-center justify-end pr-4 gap-3 flex-1 h-full'>
+        {getToken() ? (
+          <>
+            {!isHomePage && (
+              <li>
+                <NavLink to='/'>
+                  <button>Home</button>
+                </NavLink>
+              </li>
+            )}
+            {!isAdminProductsPage && user?.role === "admin" && (
+              <li>
+                <NavLink to='/admin/products'>
+                  <button>Add Products</button>
+                </NavLink>
+              </li>
+            )}
+                <li className='pr-4'>
+                  <NavLink>
+                    <button onClick={logOutUser}>Logout</button>
+                  </NavLink>
+                </li>
+            {user?.role === "user" && (
+              <>
+                <li className='flex gap-5'>
+                  <NavLink>
+                    <img src='/profile-circle-black.svg' alt='' className='text-black' />
+                  </NavLink>
+                  <NavLink>
+                    <img src='/cart-black.svg' alt='/cart.svg' />
+                  </NavLink>
+                </li>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            {!isHomePage && (
+              <li>
+                <NavLink to='/'>
+                  <button>Home</button>
+                </NavLink>
+              </li>
+            )}
+            {!isLoggedIn && (
+              <li className='pr-4'>
+                <NavLink to='/signup'>
+                  <button>Sign In</button>
+                </NavLink>
+              </li>
+            )}
+          </>
+        )}
+      </ul>
     </nav>
   );
 }
 
 export default Navbar;
+
+// {getToken() ? (
+//   <>
+//     <button onClick={logOutUser}>Logout</button>
+//     {/* <span>{user && user.name}</span> */}
+//   </>
+// ) : (
+//   <>
+//   {!isHomePage && (
+//     <Link to='/'>
+//       <button className="text-black">Home</button>
+//     </Link>
+//   )}
+//     <Link to='/signup'>
+//       <button className="text-black">Sign In</button>{" "}
+//     </Link>
+//     <Link to='/login'>
+//       {" "}
+//       <button className="text-black">Login</button>{" "}
+//     </Link>
+//   </>
+// )}
