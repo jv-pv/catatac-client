@@ -11,6 +11,7 @@ function App() {
     return localStorage.getItem("authToken");
   };
 
+  // Outlet renders whatever the current nested route url path element is
   const LoggedIn = () => {
     return getToken() ? <Outlet /> : <Navigate to='/login' />;
   };
@@ -20,7 +21,7 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh'>
+    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh bg-doodle'>
       <Navbar />
 
       <Routes>
