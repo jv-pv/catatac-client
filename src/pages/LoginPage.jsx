@@ -42,7 +42,7 @@ function LoginPage(props) {
   };
   
   return (
-    <div className="LoginPage">
+    <div className="LoginPage text-black">
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit}>
