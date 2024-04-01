@@ -41,26 +41,38 @@ a {
   object-fit: cover;
 } */
 
-button,
+/* button,
 select {
   padding: 5px 10px;
   min-width: 50px;
   margin: 5px;
   font-size: 18px;
+} */
+
+nav button:hover {
+  text-decoration: underline;
 }
 
+ul li:hover {
+  text-decoration: underline;
+}
+/* 
 label {
   width: 200px;
   display: block;
-}
+} */
 
 input,
 textarea {
-  width: 200px;
-  padding: 10px;
+  /* width: 200px; */
+  /* padding: 10px; */
   display: inline-block;
   margin: 10px;
   color: black;
+}
+
+.word-spacing {
+  word-spacing: -.4ch;
 }
 
 .prints-grid {
