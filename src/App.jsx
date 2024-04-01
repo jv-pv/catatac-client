@@ -5,10 +5,10 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import AuthPage from "./pages/AuthPage";
-import AddProductForm from "./components/AddProductForm";
 import AdminNav from "./components/AdminNav";
-import ManageProduct from "./components/ManageProduct";
 import "./App.css";
+import AdminAddProductPage from "./pages/AdminAddProductPage";
+import AdminManageProductPage from "./pages/AdminManageProductPage";
 
 function App() {
   const getToken = () => {
@@ -40,8 +40,8 @@ function App() {
 
         <Route element={<LoggedInAdmin />}>
           <Route path="/admin" element={<AdminNav/>}>
-            <Route path="products/add" element={<AddProductForm/>} />
-            <Route path="products/manage" element={<ManageProduct/>} />
+            <Route path="products/add" element={<AdminAddProductPage/>} />
+            <Route path="products/manage" element={<AdminManageProductPage/>} />
           </Route>
         </Route>
 
