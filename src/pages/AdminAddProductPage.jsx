@@ -2,7 +2,7 @@ import { useState } from "react";
 import { post } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
-const AddProductForm = () => {
+const AdminAddProductPage = () => {
   const [newProduct, setNewProduct] = useState({
     imageUrl: "",
     name: "",
@@ -129,4 +129,4 @@ const AddProductForm = () => {
   );
 };
 
-export default AddProductForm;
+export default AdminAddProductPage;
