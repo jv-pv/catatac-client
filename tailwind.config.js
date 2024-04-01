@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         aboutFont: ["aboutFont", "serif"],
+        headerFont: ["headerFont", "sans-serif"],
       },
       gridTemplateRows: {
         'auto': "auto / 1fr",
