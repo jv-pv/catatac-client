@@ -16,7 +16,7 @@ export default {
       },
       backgroundImage: {
         'doodle': "url('/images/doodle.svg')"
-      }
+      },
     },
   },
   plugins: [],
