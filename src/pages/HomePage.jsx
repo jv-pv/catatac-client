@@ -20,22 +20,44 @@ function HomePage() {
   // };
 
   return (
-    <div className='flex flex-col bg-gray-100 flex-1 text-black font-aboutFont bg-doodle object-cover py-5'>
-      <section className='flex items-center justify-around w-full border-b-2 border-black pb-4'>
+    <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover pb-5'>
+      <section className='flex items-center justify-between w-full  border-black pb-4'>
         <LandingAbout />
       </section>
-        <h1 className='text-6xl text-center mb-5'>Prints</h1>
-      <section className='max-w-[1500px]'>
+      <h1 className='text-6xl text-center my-5'>Prints</h1>
+      <section className='prints-grid h-full w-full my-4 flex justify-center'>
 
-        <article className="flex items-center justify-evenly w-full h-full">
 
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-20' />
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-20' />
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-20' />
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-20' />
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-20' />
-          
-        </article>
+          <article className='w-full hover:scale-105 transition-transform duration-300 '>
+            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
+            <div className="flex justify-between max-w-[450px]">
+              <span className="text-2xl">Name</span>
+              <span className="text-2xl">$Price</span>
+            </div>
+          </article>
+          <article className='w-full hover:scale-105 transition-transform duration-300 '>
+            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
+            <div className="flex justify-between max-w-[450px]">
+              <span className="text-2xl">Name</span>
+              <span className="text-2xl">$Price</span>
+            </div>
+          </article>
+          <article className='w-full hover:scale-105 transition-transform duration-300 '>
+            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
+            <div className="flex justify-between max-w-[450px]">
+              <span className="text-2xl">Name</span>
+              <span className="text-2xl">$Price</span>
+            </div>
+          </article>
+          <article className='w-full hover:scale-105 transition-transform duration-300 '>
+            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
+            <div className="flex justify-between max-w-[450px]">
+              <span className="text-2xl">Name</span>
+              <span className="text-2xl">$Price</span>
+            </div>
+          </article>
+
+
 
       </section>
     </div>
