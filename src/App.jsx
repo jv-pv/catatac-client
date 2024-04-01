@@ -5,6 +5,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import "./App.css";
 import AdminProductFormPage from "./pages/AdminProductFormPage";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   const getToken = () => {
@@ -33,8 +34,9 @@ function App() {
         </Route>
 
         <Route element={<NotLoggedIn />}>
-          <Route path='/signup' element={<SignupPage />} />
-          <Route path='/login' element={<LoginPage />} />
+          {/* <Route path='/signup' element={<SignupPage />} />
+          <Route path='/login' element={<LoginPage />} /> */}
+          <Route path="/auth" element={<AuthPage/>} />
         </Route>
       </Routes>
     </div>
