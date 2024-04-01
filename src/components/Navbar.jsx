@@ -14,11 +14,11 @@ function Navbar() {
 
   return (
     <nav className='flex bg-gray-100  h-16 font-headerFont'>
-      <div className='flex items-center'>
+      <div className='flex items-center pl-3'>
         <img src='/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
       </div>
 
-      <ul className='flex items-center justify-end pr-4 gap-3 flex-1 h-full'>
+      <ul className='flex items-center justify-end gap-3 flex-1 h-full'>
         {getToken() ? (
           <>
             {!isHomePage && (
@@ -30,19 +30,19 @@ function Navbar() {
             )}
             {!isAdminProductsPage && user?.role === "admin" && (
               <li>
-                <NavLink to='/admin/products'>
-                  <button>Add Products</button>
+                <NavLink to='/admin/products/add'>
+                  <button className="tracking-tighter word-spacing">Admin Panel</button>
                 </NavLink>
               </li>
             )}
-                <li className='pr-4'>
+                <li className='pr-3'>
                   <NavLink>
                     <button onClick={logOutUser}>Logout</button>
                   </NavLink>
                 </li>
             {user?.role === "user" && (
               <>
-                <li className='flex gap-5'>
+                <li className='flex gap-5 pr-3'>
                   <NavLink>
                     <img src='/profile-circle-black.svg' alt='' className='text-black' />
                   </NavLink>
