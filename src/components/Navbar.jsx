@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className='flex bg-gray-100  h-16'>
+    <nav className='flex bg-gray-100  h-16 font-headerFont'>
       <div className='flex items-center'>
         <img src='/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
       </div>
@@ -64,7 +64,7 @@ function Navbar() {
             )}
             {!isLoggedIn && (
               <li className='pr-4'>
-                <NavLink to='/signup'>
+                <NavLink to='/auth'>
                   <button>Sign In</button>
                 </NavLink>
               </li>
