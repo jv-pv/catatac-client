@@ -23,7 +23,7 @@ const AdminProductCard = ({ product }) => {
     return (
       <div className='grid grid-cols-[minmax(300px,_1fr)_2fr] gap-x-4 bg-gray-300 text-white w-1/2 min-w-[800px] rounded-lg overflow-hidden'>
         <article className='w-full h-full'>
-          <img src='/images/cover-img.jpg' alt='' className='h-full w-full object-cover rounded-l-lg' />
+          <img src={`${product.imageUrl}`} alt='' className='h-full w-full object-cover rounded-l-lg' />
         </article>
   
         <article className='flex flex-col items-start justify-center gap-6 py-5 px-4 w-full h-full text-black'>
