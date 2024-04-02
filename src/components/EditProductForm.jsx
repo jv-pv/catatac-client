@@ -1,19 +1,23 @@
-import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { put } from '../services/authService';
 import { ProductContext } from '../context/product.context';
+import { fileChange } from '../services/imageUpload';
 
 const EditProductForm = ({product, setShowModal}) => {
 
   const {fetchProducts} = useContext(ProductContext)
 
   const [editedProduct, setEditedProduct] = useState({
-    imageUrl: product.imageUrl,
     name: product.name,
     description: product.description,
     price: product.price,
     stock: product.stock
   })
+
+  const [image, setImage] = useState("")
+  const [disabled, setDisabled] = useState(false)
+
+
 
   const [editSuccessMsg, setEditSuccessMsg] = useState(undefined)
   const [editErrorMsg, setEditErrorMsg] = useState(undefined)
@@ -26,17 +30,35 @@ const EditProductForm = ({product, setShowModal}) => {
     }));
   };
 
+  const handleImageUpload = (e) => {
+    setDisabled(true)
+
+    fileChange(e)
+      .then(response => {
+        setImage(response.data.image)
+        setDisabled(false)
+      })
+      .catch(error => {
+        console.log(error)
+      }) 
+  }
+
   const handleEditSubmit = async (e) => {
     e.preventDefault()
+
+    const requestBody = {
+      imageUrl: image,
+      ...editedProduct
+    }
+
     try {
-     const response = await put(`/products/update/${product._id}`, editedProduct)
+     const response = await put(`/products/update/${product._id}`, requestBody)
      setEditSuccessMsg(response.data.successMsg)
      fetchProducts()
      console.log(response.data)
     } catch (error) {
       setEditErrorMsg(error.response.data.errorMsg)  
       setEditedProduct({
-        imageUrl: product.imageUrl,
         name: product.name,
         description: product.description,
         price: product.price,
@@ -47,18 +69,16 @@ const EditProductForm = ({product, setShowModal}) => {
 
   return (
     <section className='text-black w-full flex felx-col items-start justify-center flex-1 mt-8 font-headerFont'>
-      <div className='w-96 h-full bg-red-500 p-5'>
+      <div className='w-96 h-full bg-red-500 p-5 border-2 border-black'>
         <form onSubmit={handleEditSubmit} className='flex flex-col h-full'>
           <label htmlFor='image-url'>Image:</label>
           {/* <input type="file" name="" id="" /> */}
           <input
-            type='text'
+            type='file'
             name='imageUrl'
             id='image-url'
-            value={editedProduct.imageUrl}
-            onChange={handleFormChange}
+            onChange={handleImageUpload}
             className='my-2 mx-0 rounded-sm'
-            required
           />
           <label htmlFor='product-name'>Name:</label>
           <input
@@ -100,11 +120,11 @@ const EditProductForm = ({product, setShowModal}) => {
             className='my-2 mx-0 rounded-sm'
             required
           />
-          <button type='submit' onClick={() => {
+          <button type='submit' disabled={disabled} onClick={() => {
             setTimeout(() => {
               setShowModal(false)
             }, 1000);
-          }} className='bg-orange-400 w-16 self-center mt-3'>
+          }} className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'>
             Edit
           </button>
           {/* <button disabled={disabled} type='submit' className='bg-orange-400 w-16 self-center mt-3'>
