@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { post } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import { fileChange } from "../services/imageUpload";
 
 const AdminAddProductPage = () => {
   const [newProduct, setNewProduct] = useState({
@@ -11,6 +12,9 @@ const AdminAddProductPage = () => {
     stock: "",
   });
 
+  const [image, setImage] = useState("")
+
+  // const [disabled, setDisabled] = useState(false)
   const [addProductErrorMsg, setAddProductErrorMsg] = useState(undefined);
   const [addProductSuccessMsg, setAddProductSuccessMsg] = useState(undefined);
 
@@ -23,6 +27,19 @@ const AdminAddProductPage = () => {
       [name]: value,
     }));
   };
+
+  // const handleImageUpload = (e) => {
+  //   setDisabled(true)
+
+  //   fileChange(e)
+  //     .then(response => {
+  //       setImage(response.data.image)
+  //       setDisabled(false)
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     }) 
+  // }
 
   const handleAddSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +82,7 @@ const AdminAddProductPage = () => {
 
   return (
     <section className='text-black w-full flex felx-col items-start justify-center flex-1 mt-8 font-headerFont'>
-      <div className='w-80 h-full bg-red-500 p-5'>
+      <div className='w-96 h-full bg-red-500 p-5'>
         <form onSubmit={handleAddSubmit} className='flex flex-col h-full'>
           <label htmlFor='image-url'>Image:</label>
           {/* <input type="file" name="" id="" /> */}
@@ -121,6 +138,9 @@ const AdminAddProductPage = () => {
           <button type='submit' className='bg-orange-400 w-16 self-center mt-3'>
             Add
           </button>
+          {/* <button disabled={disabled} type='submit' className='bg-orange-400 w-16 self-center mt-3'>
+            Add
+          </button> */}
         </form>
         {addProductErrorMsg && <p className="text-center mt-3">{addProductErrorMsg}</p>}
         {addProductSuccessMsg && <p className="text-center mt-3">{addProductSuccessMsg}</p>}
