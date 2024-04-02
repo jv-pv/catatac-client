@@ -3,11 +3,12 @@ import { AuthContext } from "./context/auth.context";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
 import AuthPage from "./pages/AuthPage";
+import LoginPage from "./pages/LoginPage";
 import AdminNav from "./components/AdminNav";
 import AdminAddProductPage from "./pages/AdminAddProductPage";
 import AdminManageProductPage from "./pages/AdminManageProductPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 import "./App.css";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     return localStorage.getItem("authToken");
   };
 
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   // Outlet renders whatever the current nested route url path element is
   const LoggedIn = () => {
@@ -25,7 +26,6 @@ function App() {
   const LoggedInAdmin = () => {
     return getToken() && user?.role === "admin" ? <Outlet /> : <Navigate to='/login' />;
   };
-
 
   const NotLoggedIn = () => {
     return !getToken() ? <Outlet /> : <Navigate to='/' />;
@@ -39,21 +39,27 @@ function App() {
         <Route exact path='/' element={<HomePage />} />
 
         <Route element={<LoggedInAdmin />}>
-          <Route path="/admin" element={<AdminNav/>}>
-            <Route path="products/add" element={<AdminAddProductPage/>} />
-            <Route path="products/manage" element={<AdminManageProductPage/>} />
+          <Route path='/admin' element={<AdminNav />}>
+            <Route path='products/add' element={<AdminAddProductPage />} />
+            <Route path='products/manage' element={<AdminManageProductPage />} />
           </Route>
         </Route>
 
-        <Route element={<LoggedIn />}> </Route>
+        <Route element={<LoggedIn />}>
+          <Route path='/product'>
+
+
+          </Route>
+        </Route>
+        <Route path='/product/:productId' element={<ProductDetailsPage />} />
+
 
         <Route element={<NotLoggedIn />}>
           {/* <Route path='/signup' element={<SignupPage />} /> */}
           <Route path='/login' element={<LoginPage />} />
-          <Route path="/auth" element={<AuthPage/>} />
+          <Route path='/auth' element={<AuthPage />} />
         </Route>
       </Routes>
-
     </div>
   );
 }
