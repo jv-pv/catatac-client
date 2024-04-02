@@ -42,16 +42,20 @@ function LoginPage(props) {
   };
   
   return (
-    <div className="LoginPage text-black">
-      <h1>Login</h1>
+    <section className="w-80 bg-gray-100 border-black border-2 mx-auto mt-64 font-headerFont">
+      <h1 className="text-center py-2 text-black">Please Login</h1>
+      <div className="bg-gray-900 p-10 text-red-500">
 
-      <form onSubmit={handleLoginSubmit}>
+      <form onSubmit={handleLoginSubmit} className="flex flex-col">
         <label>Email:</label>
         <input 
           type="email"
           name="email"
           value={thisUser.email}
           onChange={handleTextChange}
+          autoComplete="current-email"
+          className="my-2 mx-0 px-1 rounded-sm"
+          required
         />
 
         <label>Password:</label>
@@ -60,15 +64,21 @@ function LoginPage(props) {
           name="password"
           value={thisUser.password}
           onChange={handleTextChange}
+          autoComplete="current-password"
+          className="my-2 mx-0 px-1 rounded-sm"
+          required
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" className="mt-7 bg-white w-24 self-center p-1 hover:bg-red-500 hover:text-white transition-colors duration-300">Login</button>
       </form>
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
-    </div>
+
+      </div>
+
+      <p className="text-black text-center mt-2">Don't have an account yet?</p>
+      <Link to={"/auth"}><p className="text-center mb-2">Sign Up</p></Link>
+    </section>
   )
 }
 
