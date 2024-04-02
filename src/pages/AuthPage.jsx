@@ -72,11 +72,11 @@ const AuthPage = () => {
   }
 
   return (
-    <div className='flex items-center flex-1 text-black'>
-      <div className='SignupPage'>
-        <h2>Don't have an acount? Sign Up!</h2>
-        <div className='border-black border-2 bg-black text-white'>
-          <form onSubmit={handleSignUpSubmit}>
+    <section className="flex justify-evenly items-center flex-1 text-black font-headerFont">
+      <article className="w-80 bg-gray-100 border-black border-2">
+        <h1 className="text-center border-black border-b-2 py-2">Don't have an acount? Sign Up!</h1>
+        <div className='bg-red-500 p-8'>
+          <form onSubmit={handleSignUpSubmit} className="flex flex-col">
             <label htmlFor='signup-email'>Email:</label>
             <input
               type='email'
@@ -85,6 +85,8 @@ const AuthPage = () => {
               value={newUserData.email}
               onChange={handleSignUpChange}
               autoComplete="new-email"
+              className="my-2 mx-0 px-1 rounded-sm"
+              required
             />
             <label htmlFor='signup-password'>Password:</label>
             <input
@@ -94,6 +96,8 @@ const AuthPage = () => {
               value={newUserData.password}
               onChange={handleSignUpChange}
               autoComplete="new-password"
+              className="my-2 mx-0 px-1 rounded-sm"
+              required
             />
             <label htmlFor='signup-name'>Full Name:</label>
             <input
@@ -102,18 +106,20 @@ const AuthPage = () => {
               name='name'
               value={newUserData.name}
               onChange={handleSignUpChange}
+              className="my-2 mx-0 px-1 rounded-sm"
+              required
             />
 
-            <button type='submit'>Sign Up</button>
+            <button type='submit' className="mt-6 bg-white w-24 self-center p-1 hover:bg-gray-900 hover:text-white transition-colors duration-300">Sign Up</button>
           </form>
-          {signUpErrorMsg && <p>{signUpErrorMsg}</p>}
+          {signUpErrorMsg && <p className="pt-6">{signUpErrorMsg}</p>}
         </div>
-      </div>
+      </article>
 
-      <div className='LoginPage'>
-        <h2>Login</h2>
-        <div className='border-2 border-black bg-black text-white'>
-          <form onSubmit={handleLoginSubmit}>
+      <article className='w-80 bg-gray-100 border-black border-2'>
+        <h1 className="text-center py-2">Have an account? Login!</h1>
+        <div className='bg-gray-900 p-10 text-red-500 group'>
+          <form onSubmit={handleLoginSubmit} className="flex flex-col">
             <label htmlFor='login-email'>Email:</label>
             <input
               type='email'
@@ -122,6 +128,8 @@ const AuthPage = () => {
               value={thisUserData.email}
               onChange={handleLoginChange}
               autoComplete="current-email"
+              className="my-2 mx-0 px-1 rounded-sm"
+              required
             />
             <label htmlFor='login-password'>Password:</label>
             <input
@@ -131,14 +139,16 @@ const AuthPage = () => {
               value={thisUserData.password}
               onChange={handleLoginChange}
               autoComplete="current-password"
+              className="my-2 mx-0 px-1 rounded-sm"
+              required
             />
 
-            <button type='submit'>Login</button>
+            <button type='submit' className="mt-6 bg-white w-24 self-center p-1 hover:bg-red-500 hover:text-white transition-colors duration-300">Login</button>
           </form>
-          {loginErrorMsg && <p>{loginErrorMsg}</p>}
+          {loginErrorMsg && <p className="text-white pt-8">{loginErrorMsg}</p>}
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 };
 
