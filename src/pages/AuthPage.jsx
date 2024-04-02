@@ -63,7 +63,7 @@ const AuthPage = () => {
       authenticateUser()
       navigate("/")
     } catch (error) {
-      setLoginErrorMsg(error.response.data.error)
+      setLoginErrorMsg(error.response.data.message)
       thisUserData({
         email: "",
         password: ""
