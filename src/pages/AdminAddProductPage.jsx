@@ -5,7 +5,6 @@ import { fileChange } from "../services/imageUpload";
 
 const AdminAddProductPage = () => {
   const [newProduct, setNewProduct] = useState({
-    imageUrl: "",
     name: "",
     description: "",
     price: "",
@@ -14,7 +13,7 @@ const AdminAddProductPage = () => {
 
   const [image, setImage] = useState("")
 
-  // const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false)
   const [addProductErrorMsg, setAddProductErrorMsg] = useState(undefined);
   const [addProductSuccessMsg, setAddProductSuccessMsg] = useState(undefined);
 
@@ -28,33 +27,27 @@ const AdminAddProductPage = () => {
     }));
   };
 
-  // const handleImageUpload = (e) => {
-  //   setDisabled(true)
+  const handleImageUpload = (e) => {
+    setDisabled(true)
 
-  //   fileChange(e)
-  //     .then(response => {
-  //       setImage(response.data.image)
-  //       setDisabled(false)
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     }) 
-  // }
+    fileChange(e)
+      .then(response => {
+        setImage(response.data.image)
+        setDisabled(false)
+      })
+      .catch(error => {
+        console.log(error)
+      }) 
+  }
 
   const handleAddSubmit = async (e) => {
     e.preventDefault();
-
-    const imageUrl =
-    newProduct.imageUrl.startsWith("http://") ||
-    newProduct.imageUrl.startsWith("https://")
-      ? newProduct.imageUrl
-      : `https://${newProduct.imageUrl}`;
 
     const priceToString = newProduct.price.toString();
     const stockToString = newProduct.stock.toString();
 
     const requestBody = {
-      imageUrl: imageUrl,
+      imageUrl: image,
       name: newProduct.name,
       description: newProduct.description,
       price: priceToString,
@@ -71,7 +64,6 @@ const AdminAddProductPage = () => {
     } catch (error) {
       setAddProductErrorMsg(error.response.data.errorMsg);
       setNewProduct({
-        imageUrl: "",
         name: "",
         description: "",
         price: "",
@@ -82,16 +74,15 @@ const AdminAddProductPage = () => {
 
   return (
     <section className='text-black w-full flex justify-center flex-1 mt-44 font-headerFont'>
-      <div className='w-96 h-full bg-red-500 p-5'>
+      <div className='w-96 h-full bg-red-500 p-5 border-2 border-black rounded-md'>
         <form onSubmit={handleAddSubmit} className='flex flex-col h-full'>
           <label htmlFor='image-url'>Image:</label>
           {/* <input type="file" name="" id="" /> */}
           <input
-            type='text'
+            type='file'
             name='imageUrl'
             id='image-url'
-            value={newProduct.imageUrl}
-            onChange={handleFormChange}
+            onChange={handleImageUpload}
             className='my-2 mx-0 rounded-sm'
             required
           />
@@ -135,12 +126,12 @@ const AdminAddProductPage = () => {
             className='my-2 mx-0 rounded-sm'
             required
           />
-          <button type='submit' className='bg-orange-400 w-16 self-center mt-3'>
-            Add
-          </button>
-          {/* <button disabled={disabled} type='submit' className='bg-orange-400 w-16 self-center mt-3'>
+          {/* <button type='submit' className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'>
             Add
           </button> */}
+          <button disabled={disabled} type='submit' className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'>
+            Add
+          </button>
         </form>
         {addProductErrorMsg && <p className="text-center mt-3">{addProductErrorMsg}</p>}
         {addProductSuccessMsg && <p className="text-center mt-3">{addProductSuccessMsg}</p>}
