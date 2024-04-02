@@ -67,7 +67,6 @@ textarea {
   /* width: 200px; */
   /* padding: 10px; */
   display: inline-block;
-  margin: 10px;
   color: black;
 }
 
@@ -83,11 +82,32 @@ textarea {
   column-gap: 1.5rem;
 }
 
-.SignupPage,
+.details-grid {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  margin-top: 64px;
+}
+
+.details-grid .image {
+  justify-self: center;
+  align-self: center;
+  padding: 3rem;
+}
+
+.details-grid .print-details {
+  justify-self: center;
+  align-self: center;
+}
+
+.details-grid .reviews {
+  grid-column: span 2;
+}
+
 .LoginPage {
   width: 400px;
   text-align: center;
   margin: 0 auto;
+  margin-top: 10rem;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 4px;
@@ -95,12 +115,12 @@ textarea {
 
 
 
-.SignupPage form,
+/* .SignupPage form,
 .LoginPage form {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 @keyframes slideFromLeft {
   0% {
