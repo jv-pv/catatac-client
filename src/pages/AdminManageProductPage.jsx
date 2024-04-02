@@ -5,8 +5,6 @@ import AdminProductCard from "../components/AdminProductCard";
 
 const AdminManageProductPage = () => {
 
-    const [showModal, setShowModal] = useState(false)
-
     const {products, fetchProducts} = useContext(ProductContext)
 
     useEffect(() => {
@@ -15,10 +13,10 @@ const AdminManageProductPage = () => {
 
 
   return (
-    <section className='flex flex-col items-center gap-5 flex-1'>
+    <section className='flex flex-col items-center gap-5 flex-1 mb-4 pt-36'>
     
     {products.map((product) => (
-        <AdminProductCard key={product._id} product={product} fetchProducts={fetchProducts} showModal={showModal} setShowModal={setShowModal}/>
+        <AdminProductCard key={product._id} product={product}/>
     ))}
     </section>
   );
