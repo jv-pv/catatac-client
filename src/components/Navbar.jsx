@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className='flex bg-gray-100  h-16 font-headerFont'>
+    <nav className='flex bg-gray-100 h-16 font-headerFont fixed top-0 left-0 right-0 z-10'>
       <div className='flex items-center pl-3'>
         <img src='/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
       </div>
