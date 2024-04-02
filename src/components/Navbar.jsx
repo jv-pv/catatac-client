@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth.context"; // <== IMPORT
 function Navbar() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-  const isAdminProductsPage = location.pathname === "/admin/products";
+  const isAdminProductsPage = location.pathname.startsWith("/admin/products/");
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext); // <== ADD
 
   const getToken = () => {
