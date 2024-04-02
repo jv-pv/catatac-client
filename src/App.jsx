@@ -32,7 +32,7 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh'>
+    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh bg-doodle'>
       <Navbar />
 
       <Routes>
@@ -53,6 +53,7 @@ function App() {
           <Route path="/auth" element={<AuthPage/>} />
         </Route>
       </Routes>
+
     </div>
   );
 }
