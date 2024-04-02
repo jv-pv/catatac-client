@@ -6,9 +6,9 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import AuthPage from "./pages/AuthPage";
 import AdminNav from "./components/AdminNav";
-import "./App.css";
 import AdminAddProductPage from "./pages/AdminAddProductPage";
 import AdminManageProductPage from "./pages/AdminManageProductPage";
+import "./App.css";
 
 function App() {
   const getToken = () => {
@@ -32,7 +32,7 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh bg-doodle'>
+    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh'>
       <Navbar />
 
       <Routes>
