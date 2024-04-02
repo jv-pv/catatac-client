@@ -13,7 +13,7 @@ const AdminManageProductPage = () => {
 
 
   return (
-    <section className='flex flex-col items-center gap-5 flex-1 mb-4 pt-36'>
+    <section className='flex flex-col items-center gap-5 flex-1 mb-4 mt-36'>
     
     {products.map((product) => (
         <AdminProductCard key={product._id} product={product}/>
