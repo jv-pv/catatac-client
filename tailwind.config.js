@@ -18,7 +18,9 @@ export default {
         'doodle': "url('/images/doodle.svg')",
       },
       backgroundColor: {
-        'blackOpaque': "rgba(0, 0, 0, 0.4)"
+        'blackOpaque': "rgba(0, 0, 0, 0.4)",
+        'grayOpaque': "rgba(0, 0, 0, 0.2)",
+        'redOpaque': "rgba(0, 0, 0, 0.2)"
       }
     },
   },
