@@ -20,7 +20,7 @@ function HomePage() {
   // };
 
   return (
-    <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover pb-5'>
+    <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover mt-16'>
       <section className='flex items-center justify-between w-full  border-black pb-4'>
         <LandingAbout />
       </section>
