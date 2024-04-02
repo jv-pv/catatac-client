@@ -17,6 +17,9 @@ export default {
       backgroundImage: {
         'doodle': "url('/images/doodle.svg')",
       },
+      backgroundColor: {
+        'blackOpaque': "rgba(0, 0, 0, 0.4)"
+      }
     },
   },
   plugins: [],
