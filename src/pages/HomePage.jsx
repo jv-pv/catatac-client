@@ -1,61 +1,30 @@
-import { AuthContext } from "../context/auth.context";
 import { useContext, useEffect, useState } from "react";
 import { get } from "../services/authService";
 import LandingAbout from "../components/LandingAbout";
+import { ProductContext } from "../context/product.context";
+import ProductCards from "../components/ProductCards";
 
 function HomePage() {
-  // const [products, setProducts] = useState([])
-  // const { isLoggedIn, user } = useContext(AuthContext);
-  // const fetchUsers = async () => {
-  //   const authToken = localStorage.getItem("authToken");
 
-  //   try {
-  //     let response = await get("/products", {
-  //       headers: { Authorization: `Bearer ${authToken}` },
-  //     });
-  //     setProducts(response.data)
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // };
+  const { products, fetchProducts } = useContext(ProductContext)
+
+  console.log(products)
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
 
   return (
     <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover mt-16'>
-      <section className='flex items-center justify-between w-full  border-black pb-4'>
+      <section className='flex items-center justify-between gap-48 w-full border-black pb-4'>
         <LandingAbout />
       </section>
       <h1 className='text-6xl text-center my-5'>Prints</h1>
-      <section className='prints-grid h-full w-full my-4 flex justify-center'>
+      <section className='prints-grid h-full max-w-[1350px] my-4 self-center'>
 
-
-          <article className='w-full hover:scale-105 transition-transform duration-300 '>
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
-            <div className="flex justify-between max-w-[450px]">
-              <span className="text-2xl">Name</span>
-              <span className="text-2xl">$Price</span>
-            </div>
-          </article>
-          <article className='w-full hover:scale-105 transition-transform duration-300 '>
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
-            <div className="flex justify-between max-w-[450px]">
-              <span className="text-2xl">Name</span>
-              <span className="text-2xl">$Price</span>
-            </div>
-          </article>
-          <article className='w-full hover:scale-105 transition-transform duration-300 '>
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
-            <div className="flex justify-between max-w-[450px]">
-              <span className="text-2xl">Name</span>
-              <span className="text-2xl">$Price</span>
-            </div>
-          </article>
-          <article className='w-full hover:scale-105 transition-transform duration-300 '>
-            <img src='/images/cover-img.jpg' alt='test-card' className='object-contain max-w-[450px]' />
-            <div className="flex justify-between max-w-[450px]">
-              <span className="text-2xl">Name</span>
-              <span className="text-2xl">$Price</span>
-            </div>
-          </article>
+      {products.map((product) => (
+        <ProductCards key={product._id} product={product} />
+      ))}
 
 
 
