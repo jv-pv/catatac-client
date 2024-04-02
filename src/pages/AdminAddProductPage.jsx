@@ -57,19 +57,19 @@ const AdminAddProductPage = () => {
       imageUrl: imageUrl,
       name: newProduct.name,
       description: newProduct.description,
-      price: `$${priceToString}`,
+      price: priceToString,
       stock: stockToString,
     };
 
     try {
-      const request = await post("/products", requestBody);
-      console.log(request.data.successMsg)
+      const response = await post("/products", requestBody);
+      console.log(response.data.successMsg)
       setTimeout(() => {
         navigate("/admin/products/add");
       }, 1500);
-      setAddProductSuccessMsg(request.data.successMsg)
+      setAddProductSuccessMsg(response.data.successMsg)
     } catch (error) {
-      setAddProductErrorMsg(error.response.data.message);
+      setAddProductErrorMsg(error.response.data.errorMsg);
       setNewProduct({
         imageUrl: "",
         name: "",
@@ -81,7 +81,7 @@ const AdminAddProductPage = () => {
   };
 
   return (
-    <section className='text-black w-full flex felx-col items-start justify-center flex-1 mt-8 font-headerFont'>
+    <section className='text-black w-full flex justify-center flex-1 mt-44 font-headerFont'>
       <div className='w-96 h-full bg-red-500 p-5'>
         <form onSubmit={handleAddSubmit} className='flex flex-col h-full'>
           <label htmlFor='image-url'>Image:</label>
