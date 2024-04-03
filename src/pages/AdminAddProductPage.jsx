@@ -82,8 +82,9 @@ const AdminAddProductPage = () => {
             type='file'
             name='imageUrl'
             id='image-url'
+            value={null}
             onChange={handleImageUpload}
-            className='my-2 mx-0 rounded-sm'
+            className='my-2 mx-0 px-2 rounded-sm'
             required
           />
           <label htmlFor='product-name'>Name:</label>
@@ -93,7 +94,7 @@ const AdminAddProductPage = () => {
             id='product-name'
             value={newProduct.name}
             onChange={handleFormChange}
-            className='my-2 mx-0 rounded-sm'
+            className='my-2 mx-0 px-1 rounded-sm'
             required
           />
           <label htmlFor='product-description'>Description:</label>
@@ -103,7 +104,7 @@ const AdminAddProductPage = () => {
             id='product-description'
             value={newProduct.description}
             onChange={handleFormChange}
-            className='my-2 mx-0 rounded-sm'
+            className='my-2 mx-0 px-1 rounded-sm'
             required
           />
           <label htmlFor='product-price'>Price:</label>
@@ -113,7 +114,7 @@ const AdminAddProductPage = () => {
             id='product-price'
             value={newProduct.price}
             onChange={handleFormChange}
-            className='my-2 mx-0 rounded-sm'
+            className='my-2 mx-0 px-1 rounded-sm'
             required
           />
           <label htmlFor='product-stock'>Stock:</label>
@@ -123,7 +124,7 @@ const AdminAddProductPage = () => {
             id='product-stock'
             value={newProduct.stock}
             onChange={handleFormChange}
-            className='my-2 mx-0 rounded-sm'
+            className='my-2 mx-0 px-1 rounded-sm'
             required
           />
           {/* <button type='submit' className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'>
