@@ -43,7 +43,7 @@ function Navbar() {
             {user?.role === "user" && (
               <>
                 <li className='flex gap-5 pr-3'>
-                  <NavLink>
+                  <NavLink to={`/user/profile/${user._id}`}>
                     <img src='/profile-circle-black.svg' alt='' className='text-black' />
                   </NavLink>
                   <NavLink>
