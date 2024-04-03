@@ -9,7 +9,12 @@ import AdminNav from "./components/AdminNav";
 import AdminAddProductPage from "./pages/AdminAddProductPage";
 import AdminManageProductPage from "./pages/AdminManageProductPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import UserNav from "./components/UserNav";
+import UserProfilePage from "./pages/UserProfilePage";
+import UserEditProfilePage from "./pages/UserEditProfilePage";
+import UserReviewsPage from "./pages/UserReviewsPage";
 import "./App.css";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const getToken = () => {
@@ -46,12 +51,14 @@ function App() {
         </Route>
 
         <Route element={<LoggedIn />}>
-          <Route path='/product'>
-
-
+          <Route path='/user' element={<UserNav/>}>
+            <Route path="profile/:userId" element={<UserProfilePage/> }/>
+            <Route path="edit/:userId" element={<UserEditProfilePage/> }/>
+            <Route path=":userId/reviews" element={<UserReviewsPage/> }/>
           </Route>
         </Route>
         <Route path='/product/:productId' element={<ProductDetailsPage />} />
+        <Route path="*" element={<ErrorPage/>}/>
 
 
         <Route element={<NotLoggedIn />}>
