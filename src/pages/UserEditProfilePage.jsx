@@ -105,7 +105,8 @@ const UserEditProfilePage = () => {
             id='user-email'
             value={editedUser.email}
             onChange={handleFormChange}
-            className='my-2 mx-0 px-1 rounded-sm'
+            className='my-2 mx-0 px-1 rounded-sm bg-red-200'
+            readOnly={true}
           />
           <label htmlFor='user-name'>Name:</label>
           <input
