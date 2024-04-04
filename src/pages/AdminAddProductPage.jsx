@@ -82,7 +82,6 @@ const AdminAddProductPage = () => {
             type='file'
             name='imageUrl'
             id='image-url'
-            value={null}
             onChange={handleImageUpload}
             className='my-2 mx-0 px-2 rounded-sm'
             required
