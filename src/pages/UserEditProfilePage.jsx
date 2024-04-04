@@ -1,25 +1,57 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
-import { put } from "../services/authService";
+import { put, get, axiosDelete } from "../services/authService";
 
 const UserEditProfilePage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, authenticateUser, logOutUser } = useContext(AuthContext);
   const navigate = useNavigate()
 
+  const [thisUser, setThisUser] = useState(null)
   const [editedUser, setEditedUser] = useState({
-    email: user?.email,
-    name: user?.name,
+    email: "",
+    name: "",
     address: {
-      street: user?.street ?? "",
-      city: user?.city ?? "",
-      state: user?.state ?? "",
-      country: user?.country ?? "",
-      zipCode: user?.zipCode ?? "",
+      street: "",
+      city: "",
+      state: "",
+      country: "",
+      zipCode: "",
     },
-    phoneNumber: user?.phoneNumber ?? "",
+    phoneNumber: ""
   });
 
+  const fetchUser = async () => {
+      try {
+          const response = await get(`/users/profile/${user?._id}`)
+          setThisUser(response.data)
+      } catch (error) {
+          console.error(error.response.data)
+      }
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchUser()
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (thisUser) {
+      setEditedUser({
+        email: thisUser.email,
+        name: thisUser.name,
+        address: thisUser.address || {
+          street: "",
+          city: "",
+          state: "",
+          country: "",
+          zipCode: "",
+        },
+        phoneNumber: thisUser.phoneNumber,
+      });
+    }
+  }, [thisUser]);
 
   const handleFormChange = (e) => {
     const {name, value} = e.target
@@ -42,18 +74,29 @@ const UserEditProfilePage = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
+
     try {
         const response = await put(`/users/profile/edit/${user?._id}`, editedUser)
-        console.log(response.data)
         navigate(`/user/profile/${user?._id}`)
     } catch (error) {
         console.error(error)
     }
   }
 
+
+  const handleUserDelete = async () => {
+    try {
+      navigate("/")
+      logOutUser()
+      await axiosDelete(`/users/profile/delete/${user._id}`)
+    } catch (error) {
+        console.error("Error deleting user")
+    }
+}
+
   return (
-    <section className='flex flex-col flex-1 items-center mt-36 text-black'>
-      <div className='bg-red-500 w-96 text-xl p-6 rounded-sm'>
+    <section className='flex flex-col flex-1 items-center mt-36 text-black font-headerFont'>
+      <div className='bg-red-500 w-96 p-6 rounded-sm border-2 border-black'>
         <form className='flex flex-col' onSubmit={handleFormSubmit}>
           <label htmlFor='user-email'>Email:</label>
           <input
@@ -100,6 +143,15 @@ const UserEditProfilePage = () => {
             onChange={handleFormChange}
             className='my-2 mx-0 px-1 rounded-sm'
           />
+          <label htmlFor='address-country'>Country:</label>
+          <input
+            type='text'
+            name='address.country'
+            id='address-country'
+            value={editedUser.address.country}
+            onChange={handleFormChange}
+            className='my-2 mx-0 px-1 rounded-sm'
+          />
           <label htmlFor='address-zip'>ZipCode:</label>
           <input
             type='text'
@@ -118,12 +170,25 @@ const UserEditProfilePage = () => {
             onChange={handleFormChange}
             className='my-2 mx-0 px-1 rounded-sm'
           />
-          <button
-            type='submit'
-            className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'
-          >
-            Edit
-          </button>
+
+          <div className="flex items-center justify-center gap-5">
+
+            <button
+              type='submit'
+              className='inline mt-6 bg-blue-500 text-white w-24 self-center p-1 rounded-sm hover:bg-gray-900 transition-colors duration-300'
+            >
+              Edit
+            </button>
+            <button
+              className='inline mt-6 bg-red-700 text-white w-24 self-center p-1 rounded-sm hover:bg-gray-900 transition-colors duration-300'
+              onClick={handleUserDelete}
+            >
+              Delete
+            </button>
+
+          </div>
+
+
         </form>
       </div>
     </section>
