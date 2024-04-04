@@ -42,8 +42,8 @@ function LoginPage(props) {
   };
   
   return (
-    <section className="w-80 bg-gray-100 border-black border-2 mx-auto mt-64 font-headerFont">
-      <h1 className="text-center py-2 text-black">Please Login</h1>
+    <section className="w-80 bg-gray-100 border-black border-2 mx-auto mt-56 font-headerFont rounded-sm">
+      <h1 className="text-xl text-center py-2 text-black">Please Login</h1>
       <div className="bg-gray-900 p-10 text-red-500">
 
       <form onSubmit={handleLoginSubmit} className="flex flex-col">
@@ -71,13 +71,13 @@ function LoginPage(props) {
 
         <button type="submit" className="mt-7 bg-white w-24 self-center p-1 hover:bg-red-500 hover:text-white transition-colors duration-300">Login</button>
       </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+      { errorMessage && <p className="error-message pt-9">{errorMessage}</p> }
 
 
       </div>
 
       <p className="text-black text-center mt-2">Don't have an account yet?</p>
-      <Link to={"/auth"}><p className="text-center mb-2">Sign Up</p></Link>
+      <Link to={"/auth"}><p className="text-center mb-2 underline hover:italic">Sign Up</p></Link>
     </section>
   )
 }
