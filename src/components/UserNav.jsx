@@ -42,7 +42,7 @@ const UserNav = () => {
               </NavLink>
               <li className='select-none'>|</li>
               <NavLink to={`/user/${user?._id}/reviews`}>
-                <li>Reviews</li>
+                <li>Orders</li>
               </NavLink>
             </>
           )}
@@ -53,7 +53,7 @@ const UserNav = () => {
               </NavLink>
               <li className='select-none'>|</li>
               <NavLink to={`/user/${user?._id}/reviews`}>
-                <li>Reviews</li>
+                <li>Orders</li>
               </NavLink>
             </>
           )}
