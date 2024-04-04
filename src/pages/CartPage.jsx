@@ -101,10 +101,17 @@ const CartPage = () => {
           </article>
         )}
 
-        <article className='flex flex-col justify-center gap-1 bg-gray-200 text-black w-full h-40 pl-4'>
-          <p className='word-spacing-tight'>Subtotal: ${subtotal}</p>
-          <p className='word-spacing-tight'>Shipping: ${shipping}</p>
-          <p className='word-spacing-tight'>Grand Total: ${grandTotal}</p>
+        <article className='flex items-center justify-between bg-gray-200 text-black w-full h-40 pl-4'>
+          <div>
+            <p className='word-spacing-tight'>Subtotal: ${subtotal}</p>
+            <p className='word-spacing-tight'>Shipping: ${shipping}</p>
+            <p className='word-spacing-tight'>Grand Total: ${grandTotal}</p>
+          </div>
+          <div className="self-end pb-4 pr-4">
+            <button className="bg-black text-white w-24 p-1 hover:bg-red-500 hover:text-black transition-colors duration-300">
+              Checkout
+            </button>
+          </div>
         </article>
       </article>
     </section>
