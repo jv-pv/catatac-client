@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { axiosDelete, get } from "../services/authService";
 import { AuthContext } from "../context/auth.context";
 import UserDetailsCard from "../components/UserDetailCard";
+import CartProductCard from "../components/CartProductCard";
 
 const CartPage = () => {
   const { user } = useContext(AuthContext);
   const [thisUser, setThisUser] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchUser = async () => {
     try {
@@ -25,9 +27,12 @@ const CartPage = () => {
 
   const fetchCartItems = async () => {
     try {
+      setIsLoading(true);
       const response = await get(`/cart`);
       setCartItems(response?.data?.cart);
+      setIsLoading(false);
     } catch (error) {
+      setThisUser(false);
       console.error(error);
     }
   };
@@ -51,7 +56,7 @@ const CartPage = () => {
       return total + item.product.price * item.quantity;
     }, 0);
 
-    const shipping = cartItems.length > 0 ? 10 : 0;
+    const shipping = cartItems.length > 0 ? 5 : 0;
     const grandTotal = subtotal + shipping;
 
     return { subtotal, shipping, grandTotal };
@@ -71,33 +76,25 @@ const CartPage = () => {
         <div className='border-b-2 border-black flex items-center justify-center p-4 drp-shadow'>
           <h1 className='text-3xl text-black text-center'>Cart</h1>
         </div>
-        {cartItems.length === 0 ? (
-          <div className='flex items-center justify-center h-full'>
+        {isLoading ? (
+          <article className='flex items-center justify-center h-full'>
+            <img src='/svg/loading.svg' alt='' className='spin w-7' />
+          </article>
+        ) : cartItems.length < 1 ? (
+          <article className='flex items-center justify-center h-full'>
             <p className='text-black text-2xl font-headerFontBold'>Empty</p>
-          </div>
+          </article>
         ) : (
           <article className=' flex flex-col gap-4 p-4 w-full h-full max-h-[600px] overflow-y-scroll'>
-            <article className='flex flex-col gap-4 p-4 w-full h-full max-h-[600px] overflow-y-scroll'>
+            <div className='flex flex-col gap-4 p-4 w-full h-full max-h-[600px] overflow-y-scroll'>
               {cartItems.map((item) => (
-                <div key={item._id} className='flex border-2 border-black text-black rounded'>
-                  <div className='flex-2'>
-                    <img
-                      src={item.product.imageUrl}
-                      alt={item.product.name}
-                      className='w-36'
-                    />
-                  </div>
-                  <div className='flex flex-col flex-1 w-full p-2'>
-                    <h2>Name: {item.product.name}</h2>
-                    <p>Quantity: {item.quantity}</p>
-                    <div className='flex items-center justify-between mt-auto'>
-                      <p>Price: ${item.product.price}</p>
-                      <button onClick={() => removeItemFromCart(item.product._id)}>X</button>
-                    </div>
-                  </div>
-                </div>
+                <CartProductCard
+                  item={item}
+                  removeItemFromCart={removeItemFromCart}
+                  key={item._id}
+                />
               ))}
-            </article>
+            </div>
           </article>
         )}
 
@@ -107,8 +104,8 @@ const CartPage = () => {
             <p className='word-spacing-tight'>Shipping: ${shipping}</p>
             <p className='word-spacing-tight'>Grand Total: ${grandTotal}</p>
           </div>
-          <div className="self-end pb-4 pr-4">
-            <button className="bg-black text-white w-24 p-1 hover:bg-red-500 hover:text-black transition-colors duration-300">
+          <div className='self-end pb-4 pr-4'>
+            <button className='bg-black text-white w-24 p-1 hover:bg-red-500 hover:text-black transition-colors duration-300'>
               Checkout
             </button>
           </div>
