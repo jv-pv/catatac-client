@@ -15,8 +15,12 @@ export default {
         'auto': "auto / 1fr",
         'prints': "auto / repeat(3, 1fr)",
       },
+      backgroundSize: {
+        "50%": "50%",
+        "16": "110rem"
+      },
       backgroundImage: {
-        'doodle': "url('/images/doodle.svg')",
+        'doodle': "url('/images/doodle.png')",
       },
       backgroundColor: {
         'blackOpaque': "rgba(0, 0, 0, 0.4)",
