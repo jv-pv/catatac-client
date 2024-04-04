@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { get } from "../services/authService";
+import { get, post } from "../services/authService";
 
 const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -37,6 +37,21 @@ const ProductDetailsPage = () => {
     });
   };
 
+  const handleAddToCart = async () => {
+
+    const productToAdd = {
+      productId: productId,
+      quantity: quantity
+    }
+
+    try {
+      const response = await post(`/cart/add`, productToAdd)
+      console.log(response.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <section className='details-grid text-black flex-1 font-headerFont'>
       <article className='image'>
@@ -46,9 +61,9 @@ const ProductDetailsPage = () => {
       </article>
       <article className='self-center justify-self-center max-w-96'>
         <div className='flex flex-col items-start justify-center gap-6 px-5 py-7 w-full h-full max-w-[400px] min-w-96 min-h-[250px] text-gray-800 bg-red-500 border-2 border-black rounded-sm'>
-          <h2 className='text-2xl ml-2'>
-            {selectedProduct?.name}
-          </h2>
+            <h2 className='text-2xl ml-2 underline'>
+              {selectedProduct?.name}
+            </h2>
           <div>
             <p className="ml-2">
               {selectedProduct?.description}
@@ -72,7 +87,7 @@ const ProductDetailsPage = () => {
                 <img src='/plus-circle-black.svg' alt='' />
               </button>
             </div>
-            <button type='button' className='bg-black text-white w-32 h-10 self-end'>
+            <button type='button' className='bg-black text-white w-32 h-10 self-end hover:text-red-500' onClick={handleAddToCart}>
               Add to Cart
             </button>
           </div>
