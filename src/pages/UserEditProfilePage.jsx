@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { put, get, axiosDelete } from "../services/authService";
 
 const UserEditProfilePage = () => {
-  const { user, authenticateUser, logOutUser } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const navigate = useNavigate()
 
   const [thisUser, setThisUser] = useState(null)
@@ -87,8 +87,8 @@ const UserEditProfilePage = () => {
   const handleUserDelete = async () => {
     try {
       navigate("/")
-      logOutUser()
       await axiosDelete(`/users/profile/delete/${user._id}`)
+      logOutUser()
     } catch (error) {
         console.error("Error deleting user")
     }
