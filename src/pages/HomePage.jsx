@@ -15,7 +15,7 @@ function HomePage() {
   }, [])
 
   return (
-    <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover mt-16'>
+    <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover mt-[60px]'>
       <section className='flex items-center justify-between gap-48 w-full border-black pb-4'>
         <LandingAbout />
       </section>
