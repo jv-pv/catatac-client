@@ -25,6 +25,15 @@
   font-kerning: auto;
 }
 
+@font-face {
+	font-family: 'headerFontBold';
+	src: url('/fonts/header-font-bold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  font-kerning: auto;
+}
+
 body {
   margin: 0;
   min-height: 100dvh;
@@ -36,19 +45,6 @@ a {
   color: black;
 }
 
-/* .background {
-  background-image: url('/images/doodle.svg');
-  object-fit: cover;
-} */
-
-/* button,
-select {
-  padding: 5px 10px;
-  min-width: 50px;
-  margin: 5px;
-  font-size: 18px;
-} */
-
 nav button:hover {
   text-decoration: underline;
 }
@@ -56,22 +52,19 @@ nav button:hover {
 ul li:hover {
   text-decoration: underline;
 }
-/* 
-label {
-  width: 200px;
-  display: block;
-} */
 
 input,
 textarea {
-  /* width: 200px; */
-  /* padding: 10px; */
   display: inline-block;
   color: black;
 }
 
 .word-spacing {
   word-spacing: -.4ch;
+}
+
+.inline-address p {
+  display: inline-block;
 }
 
 .prints-grid {
@@ -102,25 +95,6 @@ textarea {
 .details-grid .reviews {
   grid-column: span 2;
 }
-
-.LoginPage {
-  width: 400px;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 10rem;
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-
-
-/* .SignupPage form,
-.LoginPage form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
 
 @keyframes slideFromLeft {
   0% {
