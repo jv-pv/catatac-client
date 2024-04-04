@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminNav from "./components/AdminNav";
 import AdminAddProductPage from "./pages/AdminAddProductPage";
 import AdminManageProductPage from "./pages/AdminManageProductPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage"
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import UserNav from "./components/UserNav";
 import UserProfilePage from "./pages/UserProfilePage";
@@ -48,6 +49,7 @@ function App() {
           <Route path='/admin' element={<AdminNav />}>
             <Route path='products/add' element={<AdminAddProductPage />} />
             <Route path='products/manage' element={<AdminManageProductPage />} />
+            <Route path='orders' element={<AdminOrdersPage />} />
           </Route>
         </Route>
 
