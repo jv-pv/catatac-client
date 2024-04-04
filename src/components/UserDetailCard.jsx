@@ -9,12 +9,21 @@ const UserDetailsCard = ({ thisUser }) => {
     return field ? <p className='italic pl-2'>{field}</p> : null;
   };
 
+  const hasAddress = thisUser?.address &&
+  (thisUser.address.street ||
+    thisUser.address.city ||
+    thisUser.address.state ||
+    thisUser.address.country ||
+    thisUser.address.zipCode ||
+    thisUser.phoneNumber);
+
+
   return (
     <article className='flex flex-col justify-center gap-2 bg-red-500 border-2 border-black w-96 shadow-lg'>
       <div className="border-b-2 border-black p-1 drp-shadow">
-       <h1 className='text-xl font-headerFontBold text-center'>Your Details</h1>
+        <h1 className='text-xl font-headerFontBold text-center'>Your Details</h1>
       </div>
-      <div className="pl-3 word-spacing-tight"> 
+      <div className="pl-3 word-spacing-tight">
         <h2>
           <span className='font-headerFontBold'>Email:</span>{" "}
           <span className='italic'>{thisUser?.email}</span>
@@ -26,7 +35,7 @@ const UserDetailsCard = ({ thisUser }) => {
           <span className='italic'>{thisUser?.name}</span>
         </h2>
       </div>
-      {thisUser?.address && (
+      {hasAddress ? (
         <div className="pl-3 pb-2">
           <h2 className='font-headerFontBold'>Address:</h2>
           {renderAddressField(thisUser.address.street)}
@@ -41,15 +50,19 @@ const UserDetailsCard = ({ thisUser }) => {
           {renderAddressField(thisUser.address.zipCode)}
           {thisUser?.phoneNumber && <p className='italic pl-2'>{thisUser.phoneNumber}</p>}
         </div>
+      ) : (
+        <div className="pl-3 pb-2">
+          <h2><span className="font-headerFontBold">Address:</span> Not Provided</h2>
+        </div>
       )}
       {isCartPage && (
-            <NavLink to={`/user/edit/${thisUser?._id}`}>
-              <div className="flex pb-2 w-full">
-                <button className="pl-3 underline hover:italic">
-                    Edit Details
-                </button>
-              </div>
-            </NavLink>
+        <NavLink to={`/user/edit/${thisUser?._id}`}>
+          <div className="flex pb-2 w-full">
+            <button className="pl-3 underline hover:italic">
+              Edit Details
+            </button>
+          </div>
+        </NavLink>
       )}
     </article>
   );
