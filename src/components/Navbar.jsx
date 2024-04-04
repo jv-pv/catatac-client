@@ -40,7 +40,7 @@ function Navbar() {
   return (
     <nav ref={navRef} className={`flex h-16 font-headerFont fixed top-0 left-0 right-0 z-10 ${isScrolled ? "bg-gray-100 drop-shadow-md"  : "bg-transparent"}`}>
       <div className='flex items-center pl-3'>
-        <img src='/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
+        <img src='/images/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
       </div>
 
       <ul className='flex items-center justify-end gap-3 flex-1 h-full'>
@@ -69,10 +69,10 @@ function Navbar() {
               <>
                 <li className='flex gap-5 pr-3'>
                   <NavLink to={`/user/profile/${user._id}`}>
-                    <img src='/profile-circle-black.svg' alt='' className='text-black' />
+                    <img src='/svg/profile-circle-black.svg' alt='' className='text-black' />
                   </NavLink>
                   <NavLink to={`/user/${user._id}/cart`}>
-                    <img src='/cart-black.svg' alt='/cart.svg' />
+                    <img src='/svg/cart-black.svg' alt='/cart-black.svg' />
                   </NavLink>
                 </li>
               </>

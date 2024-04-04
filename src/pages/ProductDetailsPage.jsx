@@ -80,11 +80,11 @@ const ProductDetailsPage = () => {
           <div className='flex w-full justify-between items-center'>
             <div className='flex w-20 justify-evenly'>
               <button onClick={handleQuantityDecrement}>
-                <img src='/minus-circle-black.svg' alt='' />
+                <img src='/svg/minus-circle-black.svg' alt='' />
               </button>
               <p>{quantity}</p>
               <button onClick={handleQuantityIncrement}>
-                <img src='/plus-circle-black.svg' alt='' />
+                <img src='/svg/plus-circle-black.svg' alt='' />
               </button>
             </div>
             <button type='button' className='bg-black text-white w-32 h-10 self-end hover:text-red-500' onClick={handleAddToCart}>

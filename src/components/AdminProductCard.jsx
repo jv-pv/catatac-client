@@ -48,7 +48,7 @@ const AdminProductCard = ({ product }) => {
             </div>
             <div className='flex items-center justify-end w-full pr-4 gap-3'>
               <button className="bg-blue-500 text-black w-8 h-8 rounded-full flex items-center justify-center" onClick={() => setShowModal(true)}>
-                <img src='/page-edit.svg' alt='' className="w-5 h-5" />
+                <img src='/svg/page-edit.svg' alt='' className="w-5 h-5" />
               </button>
               <button className='bg-red-600 text-blue-50 rounded-full w-8 h-8' onClick={handleProductDelete}>X</button>
             </div>
