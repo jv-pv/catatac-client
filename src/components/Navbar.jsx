@@ -1,4 +1,5 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useContext } from "react"; // <== IMPORT
 import { AuthContext } from "../context/auth.context"; // <== IMPORT
 
@@ -6,14 +7,38 @@ function Navbar() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isAdminProductsPage = location.pathname.startsWith("/admin/products/");
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); // <== ADD
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
+  const [isScrolled, setIsScrolled] = useState(false)
+  const navRef = useRef(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
+      const navHeight = navRef.current.offsetHeight
+
+      if (scrollTop > navHeight - 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  })
+
+
 
   const getToken = () => {
     return localStorage.getItem("authToken");
   };
 
   return (
-    <nav className='flex bg-gray-100 h-16 font-headerFont fixed top-0 left-0 right-0 z-10'>
+    <nav ref={navRef} className={`flex h-16 font-headerFont fixed top-0 left-0 right-0 z-10 ${isScrolled ? "bg-gray-100 drop-shadow-md"  : "bg-transparent"}`}>
       <div className='flex items-center pl-3'>
         <img src='/catatac-logo.png' alt='catatac-logo' className='w-[100px] h-full' />
       </div>
@@ -46,7 +71,7 @@ function Navbar() {
                   <NavLink to={`/user/profile/${user._id}`}>
                     <img src='/profile-circle-black.svg' alt='' className='text-black' />
                   </NavLink>
-                  <NavLink>
+                  <NavLink to={`/user/${user._id}/cart`}>
                     <img src='/cart-black.svg' alt='/cart.svg' />
                   </NavLink>
                 </li>
