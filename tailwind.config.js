@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'aboutFont': ["aboutFont", "serif"],
         'headerFont': ["headerFont", "sans-serif"],
+        'headerFontBold': ["headerFontBold", "sans-serif"],
       },
       gridTemplateRows: {
         'auto': "auto / 1fr",
