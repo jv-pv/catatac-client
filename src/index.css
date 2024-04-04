@@ -60,6 +60,10 @@ textarea {
 }
 
 .word-spacing {
+  word-spacing: -.8ch;
+}
+
+.word-spacing-tight {
   word-spacing: -.4ch;
 }
 
@@ -67,6 +71,10 @@ textarea {
   display: inline-block;
 }
 
+.drp-shadow {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.4);
+}
+ 
 .prints-grid {
   display: grid;
   grid-template: auto / repeat(3, 1fr);
