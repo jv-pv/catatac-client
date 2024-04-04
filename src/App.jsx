@@ -15,6 +15,7 @@ import UserEditProfilePage from "./pages/UserEditProfilePage";
 import UserReviewsPage from "./pages/UserReviewsPage";
 import "./App.css";
 import ErrorPage from "./pages/ErrorPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const getToken = () => {
@@ -37,7 +38,7 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh bg-doodle'>
+    <div className='flex flex-col bg-gray-100 text-white w-full min-h-dvh bg-doodle bg-repeat-y'>
       <Navbar />
 
       <Routes>
@@ -55,6 +56,7 @@ function App() {
             <Route path="profile/:userId" element={<UserProfilePage/> }/>
             <Route path="edit/:userId" element={<UserEditProfilePage/> }/>
             <Route path=":userId/reviews" element={<UserReviewsPage/> }/>
+            <Route path=":userId/cart" element={<CartPage/> } />
           </Route>
         </Route>
         <Route path='/product/:productId' element={<ProductDetailsPage />} />
