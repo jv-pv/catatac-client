@@ -86,7 +86,6 @@ function App() {
 
 
         <Route element={<NotLoggedIn />}>
-          {/* <Route path='/signup' element={<SignupPage />} /> */}
           <Route path='/login' element={<LoginPage />} />
           <Route path='/auth' element={<AuthPage />} />
         </Route>

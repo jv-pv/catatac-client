@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='text-black flex items-center justify-between'>
+    <div className='text-black flex items-center justify-between font-headerFont'>
         <div className='flex gap-2'>
             <a href="https://www.instagram.com/catatac.art/" target='_blank'>
                 <img src="/svg/instagram.svg" alt="instagram"  className=''/>
