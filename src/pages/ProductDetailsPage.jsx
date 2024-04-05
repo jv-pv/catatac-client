@@ -51,7 +51,7 @@ const ProductDetailsPage = ({fetchCartItems}) => {
       console.log(response.data);
       setButtonText("Added!")
       setTimeout(() => {
-        setButtonText("Add to Text")
+        setButtonText("Add to Cart")
       }, 750);
       fetchCartItems()
     } catch (error) {
