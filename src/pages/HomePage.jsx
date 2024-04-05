@@ -7,8 +7,6 @@ import ProductCards from "../components/ProductCards";
 function HomePage() {
   const { products, fetchProducts } = useContext(ProductContext);
 
-  console.log(products);
-
   useEffect(() => {
     fetchProducts();
   }, []);

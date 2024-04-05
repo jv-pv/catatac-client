@@ -1,50 +1,24 @@
-import { useContext, useEffect, useState } from "react";
-import { axiosDelete, get } from "../services/authService";
+import { useContext, useEffect } from "react";
+import { axiosDelete } from "../services/authService";
 import { AuthContext } from "../context/auth.context";
+import { ThisUserContext } from "../context/user.context";
 import UserDetailsCard from "../components/UserDetailCard";
 import CartProductCard from "../components/CartProductCard";
 
-const CartPage = () => {
+const CartPage = ({cartItems, isLoading, fetchCartItems}) => {
   const { user } = useContext(AuthContext);
-  const [thisUser, setThisUser] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchUser = async () => {
-    try {
-      const response = await get(`/users/profile/${user?._id}`);
-      setThisUser(response.data);
-    } catch (error) {
-      console.error(error.response);
-    }
-  };
+  const { thisUser, fetchThisUser } = useContext(ThisUserContext)
 
   useEffect(() => {
     if (user) {
-      fetchUser();
+      fetchThisUser();
     }
-  }, []);
-
-  const fetchCartItems = async () => {
-    try {
-      setIsLoading(true);
-      const response = await get(`/cart`);
-      setCartItems(response?.data?.cart);
-      setIsLoading(false);
-    } catch (error) {
-      setThisUser(false);
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartItems();
   }, []);
 
   const removeItemFromCart = async (productId) => {
     try {
       const response = await axiosDelete(`/cart/remove/${productId}`);
-      fetchCartItems();
+      await fetchCartItems();
       console.log(response.data);
     } catch (error) {
       console.error(error);
