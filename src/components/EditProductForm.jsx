@@ -1,26 +1,23 @@
-import React, { useContext, useState } from 'react'
-import { put } from '../services/authService';
-import { ProductContext } from '../context/product.context';
-import { fileChange } from '../services/imageUpload';
+import React, { useContext, useState } from "react";
+import { put } from "../services/authService";
+import { ProductContext } from "../context/product.context";
+import { fileChange } from "../services/imageUpload";
 
-const EditProductForm = ({product, setShowModal}) => {
-
-  const {fetchProducts} = useContext(ProductContext)
+const EditProductForm = ({ product, setShowModal }) => {
+  const { fetchProducts } = useContext(ProductContext);
 
   const [editedProduct, setEditedProduct] = useState({
     name: product.name,
     description: product.description,
     price: product.price,
-    stock: product.stock
-  })
+    stock: product.stock,
+  });
 
-  const [image, setImage] = useState("")
-  const [disabled, setDisabled] = useState(false)
+  const [image, setImage] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
-
-
-  const [editSuccessMsg, setEditSuccessMsg] = useState(undefined)
-  const [editErrorMsg, setEditErrorMsg] = useState(undefined)
+  const [editSuccessMsg, setEditSuccessMsg] = useState(undefined);
+  const [editErrorMsg, setEditErrorMsg] = useState(undefined);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -31,41 +28,41 @@ const EditProductForm = ({product, setShowModal}) => {
   };
 
   const handleImageUpload = (e) => {
-    setDisabled(true)
+    setDisabled(true);
 
     fileChange(e)
-      .then(response => {
-        setImage(response.data.image)
-        setDisabled(false)
+      .then((response) => {
+        setImage(response.data.image);
+        setDisabled(false);
       })
-      .catch(error => {
-        console.log(error)
-      }) 
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleEditSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const requestBody = {
       imageUrl: image,
-      ...editedProduct
-    }
+      ...editedProduct,
+    };
 
     try {
-     const response = await put(`/products/update/${product._id}`, requestBody)
-     setEditSuccessMsg(response.data.successMsg)
-     fetchProducts()
-     console.log(response.data)
+      const response = await put(`/products/update/${product._id}`, requestBody);
+      setEditSuccessMsg(response.data.successMsg);
+      fetchProducts();
+      console.log(response.data);
     } catch (error) {
-      setEditErrorMsg(error.response.data.errorMsg)  
+      setEditErrorMsg(error.response.data.errorMsg);
       setEditedProduct({
         name: product.name,
         description: product.description,
         price: product.price,
-        stock: product.stock
-      })   
+        stock: product.stock,
+      });
     }
-  } 
+  };
 
   return (
     <section className='text-black w-full flex felx-col items-start justify-center flex-1 mt-8 font-headerFont'>
@@ -120,22 +117,33 @@ const EditProductForm = ({product, setShowModal}) => {
             className='my-2 mx-0 rounded-sm'
             required
           />
-          <button type='submit' disabled={disabled} onClick={() => {
-            setTimeout(() => {
-              setShowModal(false)
-            }, 1000);
-          }} className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'>
-            Edit
-          </button>
-          {/* <button disabled={disabled} type='submit' className='bg-orange-400 w-16 self-center mt-3'>
-            Add
-          </button> */}
+          {disabled ? (
+            <button
+              disabled={disabled}
+              className='flex justify-center items-center mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'
+            >
+              <img src='/svg/loading.svg' alt='loading-spinner' className='spin w-5' />
+            </button>
+          ) : (
+            <button
+              type='submit'
+              disabled={disabled}
+              onClick={() => {
+                setTimeout(() => {
+                  setShowModal(false);
+                }, 1000);
+              }}
+              className='mt-6 bg-orange-300 w-24 self-center p-1 rounded-sm hover:bg-gray-900 hover:text-white transition-colors duration-300'
+            >
+              Edit
+            </button>
+          )}
         </form>
-        {editErrorMsg && <p className="text-center mt-3">{editErrorMsg}</p>}
-        {editSuccessMsg && <p className="text-center mt-3">{editSuccessMsg}</p>}
+        {editErrorMsg && <p className='text-center mt-3'>{editErrorMsg}</p>}
+        {editSuccessMsg && <p className='text-center mt-3'>{editSuccessMsg}</p>}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default EditProductForm
+export default EditProductForm;
