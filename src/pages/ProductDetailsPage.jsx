@@ -3,7 +3,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { get, post } from "../services/authService";
 import { AuthContext } from "../context/auth.context";
 
-const ProductDetailsPage = () => {
+const ProductDetailsPage = ({fetchCartItems}) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [buttonText, setButtonText] = useState("Add to Cart")
@@ -53,6 +53,7 @@ const ProductDetailsPage = () => {
       setTimeout(() => {
         setButtonText("Add to Text")
       }, 750);
+      fetchCartItems()
     } catch (error) {
       console.error(error);
     }
