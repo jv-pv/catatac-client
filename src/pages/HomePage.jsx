@@ -5,14 +5,13 @@ import { ProductContext } from "../context/product.context";
 import ProductCards from "../components/ProductCards";
 
 function HomePage() {
+  const { products, fetchProducts } = useContext(ProductContext);
 
-  const { products, fetchProducts } = useContext(ProductContext)
-
-  console.log(products)
+  console.log(products);
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
+    fetchProducts();
+  }, []);
 
   return (
     <div className='flex flex-col mx-auto flex-1 text-black font-aboutFont object-cover mt-[60px]'>
@@ -21,13 +20,9 @@ function HomePage() {
       </section>
       <h1 className='text-6xl text-center my-5'>Prints</h1>
       <section className='prints-grid h-full max-w-[1350px] my-4 self-center'>
-
-      {products.map((product) => (
-        <ProductCards key={product._id} product={product} />
-      ))}
-
-
-
+        {products.map((product) => (
+          <ProductCards key={product._id} product={product} />
+        ))}
       </section>
     </div>
   );
