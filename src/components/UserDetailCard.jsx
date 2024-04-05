@@ -19,7 +19,7 @@ const UserDetailsCard = ({ thisUser }) => {
 
 
   return (
-    <article className='flex flex-col justify-center gap-2 bg-red-500 border-2 border-black w-96 shadow-lg'>
+    <article className='flex flex-col justify-center gap-2 bg-red-500 border-2 border-black w-96 shadow-lg rounded-sm'>
       <div className="border-b-2 border-black p-1 drp-shadow">
         <h1 className='text-xl font-headerFontBold text-center'>Your Details</h1>
       </div>
