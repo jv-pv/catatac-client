@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth.context";
 const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [buttonText, setButtonText] = useState("Add to Cart")
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -48,6 +49,10 @@ const ProductDetailsPage = () => {
     try {
       const response = await post(`/cart/add`, productToAdd);
       console.log(response.data);
+      setButtonText("Added!")
+      setTimeout(() => {
+        setButtonText("Add to Text")
+      }, 750);
     } catch (error) {
       console.error(error);
     }
@@ -92,7 +97,7 @@ const ProductDetailsPage = () => {
                 className='bg-black text-white w-32 h-10 self-end hover:text-red-500'
                 onClick={handleAddToCart}
               >
-                Add to Cart
+                {buttonText}
               </button>
             ) : (
               <NavLink to='/login'>
