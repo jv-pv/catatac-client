@@ -19,7 +19,7 @@ import { get } from "./services/authService";
 import "./App.css";
 import UserOrdersPage from "./pages/UserOrdersPage";
 
-function App() {
+const App = () => {
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
