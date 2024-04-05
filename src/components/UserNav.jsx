@@ -6,7 +6,7 @@ const UserNav = () => {
   const { user } = useContext(AuthContext);
   const userProfilePage = location.pathname === `/user/profile/${user?._id}`;
   const userEditPage = location.pathname === `/user/edit/${user?._id}`;
-  const userReviewsPage = location.pathname === `/user/${user?._id}/reviews`;
+  const UserOrdersPage = location.pathname === `/user/${user?._id}/orders`;
 
   const navRef = useRef(null)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -41,7 +41,7 @@ const UserNav = () => {
                 <li>Edit Profile</li>
               </NavLink>
               <li className='select-none'>|</li>
-              <NavLink to={`/user/${user?._id}/reviews`}>
+              <NavLink to={`/user/${user?._id}/orders`}>
                 <li>Orders</li>
               </NavLink>
             </>
@@ -52,12 +52,12 @@ const UserNav = () => {
                 <li>Profile</li>
               </NavLink>
               <li className='select-none'>|</li>
-              <NavLink to={`/user/${user?._id}/reviews`}>
+              <NavLink to={`/user/${user?._id}/orders`}>
                 <li>Orders</li>
               </NavLink>
             </>
           )}
-          {userReviewsPage && (
+          {UserOrdersPage && (
             <>
               <NavLink to={`/user/edit/${user?._id}`}>
                 <li>Edit Profile</li>
