@@ -59,7 +59,7 @@ const CartPage = ({cartItems, isLoading, fetchCartItems}) => {
             <p className='text-black text-2xl font-headerFontBold'>Empty</p>
           </article>
         ) : (
-          <article className=' flex flex-col gap-4 p-4 w-full h-full max-h-[600px] overflow-y-scroll'>
+          <article className='flex flex-col gap-4 p-4 w-full h-full max-h-[600px] overflow-y-scroll'>
             <div className='flex flex-col gap-4 p-4 w-full h-full max-h-[600px] overflow-y-scroll'>
               {cartItems.map((item) => (
                 <CartProductCard
