@@ -45,7 +45,6 @@ const App = () => {
 
   const { user } = useContext(AuthContext);
 
-  // Outlet renders whatever the current nested route url path element is
   const LoggedIn = () => {
     return getToken() ? <Outlet /> : <Navigate to='/auth' />;
   };
